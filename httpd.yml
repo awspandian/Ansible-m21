@@ -1,0 +1,17 @@
+---
+- hosts: dev
+  become: true
+  tasks:
+    - name: Install Httpd
+      yum:
+        name: httpd
+        state: present
+    - name: Copy index.html
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+    - name: Start Httpd Server
+      service:
+        name: httpd
+        state: started
+

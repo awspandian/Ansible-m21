@@ -1,0 +1,30 @@
+## 1. CREATE AN EMPTY FILE, ADD CONTENT TO FILE, DISPLAY FILE DATA
+---
+- name: Create a new file on remote host
+  hosts: dev
+  user: ansible
+  become: true  
+  gather_facts: false
+
+  tasks:
+    - name: Create the file
+      ansible.builtin.file:
+        path: /home/ansible/march.txt
+        state: touch
+      # Create an empty file on the remote host
+    - name: Add content to the file
+      blockinfile:
+        path: /home/ansible/march.txt
+        block: |
+          This is the first line of the file.
+          This is the second line of the file.
+          This is the third line of the file.
+    - name: Display the file content
+      shell: cat /home/ansible/march.txt
+      register: file_content
+      # Execute 'cat' command to display the content of the file and register the output
+
+    - name: Print the file content
+      debug:
+        var: file_content.stdout
+      # Print the output of the previous task, which contains the content of the file

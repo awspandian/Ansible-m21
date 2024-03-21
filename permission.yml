@@ -1,0 +1,20 @@
+##2. CHANGE FILE PERMISSIONS(CHMOD) AND OWNER/GROUP DETAILS(CHOWN)
+---
+- name: Change file permission and owner details
+  hosts: dev
+  user: ansible
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Change file permission
+      file:
+        path: /home/ansible/march.txt
+        mode: "0755"
+      # Change the file permission to 0644 (rwxr-xr-x)
+    - name: Change file owner
+      file:
+        path: /home/ansible/march.txt
+        owner: ansible
+        group: ansible
+      # Change the file owner to 'your_username' and group to 'your_groupname'
