@@ -1,0 +1,5 @@
+---
+- hosts: ubu 
+  roles:
+    - role: 'roles/tomcat'
+      become: yes
